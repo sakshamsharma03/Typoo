@@ -1,10 +1,11 @@
 const typingText=document.querySelector(" .typing-text p");
-const inp=document.querySelector(" .wrapper .input-field");
+const inp=document.querySelector(" .wrapper .input-fielf");
 const time = document.querySelector(" .time span b");
 const msitakes =document.querySelector(" .mistake span");
 const wpm =document.querySelector(" .wpn span");
 const cpm= document.querySelector(" .cpm span");
 const btn = document.querySelector("button");
+const ta= document.querySelector(" .tryagain");
 
 let timer;
 let maxTime=60;
@@ -22,7 +23,7 @@ function LoadParagraph()
     typingText.innerHTML=" ";
     for(const char of paragraph[randomIndex])
     {
-        console.log(char);
+       console.log(char);
         typingText.innerHTML+= `<span>${char}</span>`;
     }
     typingText.querySelectorAll("span")[0].classList.add("active");
@@ -31,8 +32,9 @@ function LoadParagraph()
 LoadParagraph();
 
 
-function initTyping ()
+/*function initTyping ()
 {
+    console.log("chlra hai ");
  const char=typingText.querySelectorAll("span");
  const typechar= inp.value.charAt(charIndex);
 
@@ -52,6 +54,34 @@ function initTyping ()
  else{
 
  }
-}
+}*/
 
-inp.addEventListener("input", initTyping());
+inp.addEventListener("input", ()=>
+{
+   
+    const char=typingText.querySelectorAll("span");
+    const typechar= inp.value.charAt(charIndex);
+   
+    if(charIndex < char.length && timeLeft>0 )
+    {
+       if(char[charIndex].innerText===typechar)
+       {
+           char[charIndex].classList.add("correct");
+           console.log("Correct");
+       }
+       else{
+           mistakes++;
+           char[charIndex].classList.add("incorrect");
+           console.log("inCorrect");
+       }
+       charIndex++;
+    }
+    else{
+   
+    }
+});
+
+ta.addEventListener("click",()=>
+{
+    window.location.reload();
+})
